@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SupplyScopeMVC.Application.Interfaces;
+using SupplyScopeMVC.Application.Services;
 using SupplyScopeMVC.Web.Data;
+using SupplyScopeMVC.Web.Models;
 
 namespace SupplyScopeMVC.Web
 {
@@ -19,6 +22,9 @@ namespace SupplyScopeMVC.Web
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddTransient<IProductServices, ProductServices>();
+           // builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
             var app = builder.Build();
 
@@ -40,6 +46,12 @@ namespace SupplyScopeMVC.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // **              ** //
+            //app.MapControllerRoute(
+            //name: "productSpecification",
+            //pattern: "productSpecification/{*product}",
+            //defaults: new { controller = "ProductSpecification", action = "Product" });
 
             app.MapControllerRoute(
                 name: "default",
