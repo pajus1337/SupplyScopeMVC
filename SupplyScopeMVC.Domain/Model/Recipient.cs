@@ -12,7 +12,9 @@ namespace SupplyScopeMVC.Domain.Model
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public string  CEOFirstName { get; set; }
+        public string CEOLastName { get; set; }
+        public byte[] LogoPic { get; set; }
 
         public RecipientContactInformation RecipientContactInformation { get; set; }
         public virtual ICollection<ContactDetail> ContactDetails { get; set; }
