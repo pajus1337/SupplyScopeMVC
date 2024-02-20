@@ -14,7 +14,6 @@ namespace SupplyScopeMVC.Domain.Model
         public string ZIP { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public string DeliveryAddress { get; set; }
         public int RecipientId { get; set; }
         public virtual Recipient Recipient { get; set; }
     }
