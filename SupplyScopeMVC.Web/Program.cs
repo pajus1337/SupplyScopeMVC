@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SupplyScopeMVC.Application.Interfaces;
 using SupplyScopeMVC.Application.Services;
+using SupplyScopeMVC.Domain.Interfaces;
 using SupplyScopeMVC.Infrastructure.Repositories;
 using SupplyScopeMVC.Web.Models;
 
@@ -22,7 +23,8 @@ namespace SupplyScopeMVC.Web
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddTransient<IProductServices, ProductServices>();
-           // builder.Services.AddTransient<IProductRepository, ProductRepository>();
+            // builder.Services.AddTransient<IRecipientService, RecipientService>();
+            builder.Services.AddTransient<IRecipientRepository, RecipientRepository>();
 
             var app = builder.Build();
 
