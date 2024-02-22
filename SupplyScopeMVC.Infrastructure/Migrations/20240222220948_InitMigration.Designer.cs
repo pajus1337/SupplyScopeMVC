@@ -12,8 +12,8 @@ using SupplyScopeMVC.Infrastructure.Repositories;
 namespace SupplyScopeMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231218093109_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240222220948_InitMigration")]
+    partial class InitMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -247,10 +247,6 @@ namespace SupplyScopeMVC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DeliveryAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("RecipientId")
                         .HasColumnType("int");
 
@@ -374,6 +370,20 @@ namespace SupplyScopeMVC.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CEOFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CEOLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("LogoPic")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

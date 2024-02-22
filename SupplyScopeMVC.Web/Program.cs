@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SupplyScopeMVC.Application;
 using SupplyScopeMVC.Application.Interfaces;
 using SupplyScopeMVC.Application.Services;
 using SupplyScopeMVC.Domain.Interfaces;
+using SupplyScopeMVC.Infrastructure;
 using SupplyScopeMVC.Infrastructure.Repositories;
 using SupplyScopeMVC.Web.Models;
 
@@ -18,13 +20,11 @@ namespace SupplyScopeMVC.Web
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Context>();
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddTransient<IProductServices, ProductServices>();
-            // builder.Services.AddTransient<IRecipientService, RecipientService>();
-            builder.Services.AddTransient<IRecipientRepository, RecipientRepository>();
+            builder.Services.AddApplication();
+            builder.Services.AddInfrastructure();
 
             var app = builder.Build();
 
@@ -42,9 +42,7 @@ namespace SupplyScopeMVC.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             // **              ** //
@@ -57,7 +55,6 @@ namespace SupplyScopeMVC.Web
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
-
             app.Run();
         }
     }

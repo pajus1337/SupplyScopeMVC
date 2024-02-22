@@ -35,6 +35,10 @@ namespace SupplyScopeMVC.Infrastructure.Repositories
                 .HasOne(a => a.RecipientContactInformation).WithOne(b => b.Recipient)
                 .HasForeignKey<RecipientContactInformation>(e => e.RecipientRef);
 
+            builder.Entity<Recipient>()
+                   .Property(r => r.LogoPic)
+                   .IsRequired(false);
+
             builder.Entity<ProductTag>()
                 .HasKey(pt => new { pt.ProductId, pt.TagId });
 

@@ -10,14 +10,21 @@ namespace SupplyScopeMVC.Infrastructure.Repositories
 {
     public class RecipientRepository : IRecipientRepository
     {
+        private readonly Context _contex;
+
+        public RecipientRepository(Context context)
+        {
+            _contex = context;
+        }
+
         public IQueryable<Recipient> GetAllActiveRecipients()
         {
-            throw new NotImplementedException();
+            return _contex.Recipients.Where(p => p.IsActive);
         }
 
         public Recipient GetRecipient(int recipientId)
         {
-            throw new NotImplementedException();
+            return _contex.Recipients.FirstOrDefault(p => p.Id == recipientId);
         }
     }
 }

@@ -44,15 +44,18 @@ namespace SupplyScopeMVC.Application.Services
             var recipient = _recipientRepository.GetRecipient(recipientId);
             var recipientVm = _mapper.Map<RecipientDetailsVm>(recipient);
 
-            foreach (var address in recipient.Addresses)
+            if (recipient.Addresses != null)
             {
-                var add = new AddressForListVm()
+                foreach (var address in recipient.Addresses)
                 {
-                    Id = address.Id,
-                    Country = address.Country,
-                    City = address.City
-                };
-                recipientVm.Addresses.Add(add);
+                    var add = new AddressForListVm()
+                    {
+                        Id = address.Id,
+                        Country = address.Country,
+                        City = address.City
+                    };
+                    recipientVm.Addresses.Add(add);
+                }
             }
             return recipientVm;
         }
