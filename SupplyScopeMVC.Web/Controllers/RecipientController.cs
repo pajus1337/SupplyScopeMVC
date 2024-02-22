@@ -31,14 +31,14 @@ namespace SupplyScopeMVC.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewAdressForRecipient(AddressModel model)
+        public IActionResult AddNewAddressForRecipient(AddressModel model)
         {
             return View();
         }
 
         public IActionResult ViewRecipient(int recipientId)
         {
-            var recipientModel = recipientService.GetReciepientById(recipientId);
+            var recipientModel = recipientService.GetReciepient(recipientId);
             return View(recipientModel);
         }
     }

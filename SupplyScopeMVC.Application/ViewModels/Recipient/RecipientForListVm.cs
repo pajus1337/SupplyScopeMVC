@@ -9,7 +9,6 @@ namespace SupplyScopeMVC.Application.ViewModels.Recipient
     public class RecipientForListVm
     {
         public int Id { get; set; }
-        public string Name { get; set; }        
-
+        public string Name { get; set; }     
     }
 }
