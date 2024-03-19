@@ -10,7 +10,7 @@ namespace SupplyScopeMVC.Application.Interfaces
 {
     public interface IRecipientService
     {
-        ListRecipientForListVm GetAllRecipientsForList();
+        ListRecipientForListVm GetAllRecipientsForList(int pageSize, int pageNumber, string saerchString);
         int AddRecipient(NewRecipientVm recipient);
         RecipientDetailsVm GetRecipientDetails(int recipientId);
     }

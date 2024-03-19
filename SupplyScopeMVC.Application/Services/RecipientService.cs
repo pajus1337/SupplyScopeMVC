@@ -28,11 +28,15 @@ namespace SupplyScopeMVC.Application.Services
             throw new NotImplementedException();
         }
 
-        public ListRecipientForListVm GetAllRecipientsForList()
+        public ListRecipientForListVm GetAllRecipientsForList(int pageSize, int pageNumber, string searchString)
         {
-            var recipients = _recipientRepository.GetAllActiveRecipients().ProjectTo<RecipientForListVm>(_mapper.ConfigurationProvider).ToList();
+            var recipients = _recipientRepository.GetAllActiveRecipients().Where(p => p.Name.StartsWith(searchString)).ProjectTo<RecipientForListVm>(_mapper.ConfigurationProvider).ToList();
+            var recipientsToShow = recipients.Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
             var recipientList = new ListRecipientForListVm()
             {
+                PageSize = pageSize,
+                CurrentPage = pageNumber,
+                SearchString = searchString,
                 Recipients = recipients,
                 Count = recipients.Count,
             };

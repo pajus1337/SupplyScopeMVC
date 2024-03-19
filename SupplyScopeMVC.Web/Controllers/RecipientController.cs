@@ -12,10 +12,17 @@ namespace SupplyScopeMVC.Web.Controllers
         {
             _recipientService = recipientService;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
-            var model = _recipientService.GetAllRecipientsForList();
+            var model = _recipientService.GetAllRecipientsForList(2, 1 "");
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int pageSize, int pageNumber, string searchString)
+        {
+            var model = _recipientService.GetAllRecipientsForList(pageSize,pageNumber,searchString);
             return View(model);
         }
 
