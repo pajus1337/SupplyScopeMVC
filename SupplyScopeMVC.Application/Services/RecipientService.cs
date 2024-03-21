@@ -4,6 +4,7 @@ using SupplyScopeMVC.Application.Interfaces;
 using SupplyScopeMVC.Application.Mapping;
 using SupplyScopeMVC.Application.ViewModels.Recipient;
 using SupplyScopeMVC.Domain.Interfaces;
+using SupplyScopeMVC.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,10 @@ namespace SupplyScopeMVC.Application.Services
         }
 
         public int AddRecipient(NewRecipientVm recipient)
-        {
-            throw new NotImplementedException();
+        {       
+            var newRecipient = _mapper.Map<Recipient>(recipient);
+            var id = _recipientRepository.AddRecipient(newRecipient);
+            return id;
         }
 
         public ListRecipientForListVm GetAllRecipientsForList(int pageSize, int pageNumber, string searchString)

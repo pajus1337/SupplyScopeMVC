@@ -46,7 +46,7 @@ namespace SupplyScopeMVC.Web.Controllers
         public IActionResult AddRecipient(NewRecipientVm model)
         {
             var id = _recipientService.AddRecipient(model);
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

@@ -17,6 +17,13 @@ namespace SupplyScopeMVC.Infrastructure.Repositories
             _contex = context;
         }
 
+        public int AddRecipient(Recipient recipient)
+        {
+            _contex.Recipients.Add(recipient);
+            _contex.SaveChanges();
+            return recipient.Id;
+        }
+
         public IQueryable<Recipient> GetAllActiveRecipients()
         {
             return _contex.Recipients.Where(p => p.IsActive);

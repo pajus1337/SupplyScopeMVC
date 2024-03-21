@@ -11,5 +11,6 @@ namespace SupplyScopeMVC.Domain.Interfaces
     {
         IQueryable<Recipient> GetAllActiveRecipients();
         Recipient GetRecipient(int recipientId);
+        int AddRecipient(Recipient recipient);
     }
 }
