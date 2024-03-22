@@ -66,5 +66,18 @@ namespace SupplyScopeMVC.Application.Services
             }
             return recipientVm;
         }
+
+        public NewRecipientVm GetRecipientForEdit(int id)
+        {
+            var recipient = _recipientRepository.GetRecipient(id);
+            var recipientVm = _mapper.Map<NewRecipientVm>(recipient);
+            return recipientVm;
+        }
+
+        public void UpdateRecipient(NewRecipientVm model)
+        {
+            var recipient = _mapper.Map<Recipient>(model);
+            _recipientRepository.UpdateRecipient(recipient);
+        }
     }
 }

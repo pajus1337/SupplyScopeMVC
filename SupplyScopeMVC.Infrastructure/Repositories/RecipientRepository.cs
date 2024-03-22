@@ -33,5 +33,12 @@ namespace SupplyScopeMVC.Infrastructure.Repositories
         {
             return _contex.Recipients.FirstOrDefault(p => p.Id == recipientId);
         }
+
+        public void UpdateRecipient(Recipient recipient)
+        {
+            _contex.Attach(recipient);
+            _contex.Entry(recipient).Property("Name").IsModified = true;
+            _contex.SaveChanges();
+        }
     }
 }

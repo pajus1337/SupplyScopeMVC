@@ -43,10 +43,34 @@ namespace SupplyScopeMVC.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddRecipient(NewRecipientVm model)
         {
-            var id = _recipientService.AddRecipient(model);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var id = _recipientService.AddRecipient(model);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult EditRecipient(int id)
+        {
+            var recipient = _recipientService.GetRecipientForEdit(id);
+            return View(recipient);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditRecipient(NewRecipientVm model)
+        {
+            if (ModelState.IsValid)
+            { 
+                _recipientService.UpdateRecipient(model);
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         [HttpGet]

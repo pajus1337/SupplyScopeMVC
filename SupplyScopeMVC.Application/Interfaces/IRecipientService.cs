@@ -13,5 +13,8 @@ namespace SupplyScopeMVC.Application.Interfaces
         ListRecipientForListVm GetAllRecipientsForList(int pageSize, int pageNumber, string saerchString);
         int AddRecipient(NewRecipientVm recipient);
         RecipientDetailsVm GetRecipientDetails(int recipientId);
+        NewRecipientVm GetRecipientForEdit(int id);
+        void UpdateRecipient(NewRecipientVm model);
+
     }
 }

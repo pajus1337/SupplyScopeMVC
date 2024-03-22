@@ -1,8 +1,11 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SupplyScopeMVC.Application;
 using SupplyScopeMVC.Application.Interfaces;
 using SupplyScopeMVC.Application.Services;
+using SupplyScopeMVC.Application.ViewModels.Recipient;
 using SupplyScopeMVC.Domain.Interfaces;
 using SupplyScopeMVC.Infrastructure;
 using SupplyScopeMVC.Infrastructure.Repositories;
@@ -22,6 +25,9 @@ namespace SupplyScopeMVC.Web
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Context>();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddFluentValidationClientsideAdapters();
+            builder.Services.AddTransient<IValidator<NewRecipientVm>, NewRecipientValidaton>();
 
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure();
