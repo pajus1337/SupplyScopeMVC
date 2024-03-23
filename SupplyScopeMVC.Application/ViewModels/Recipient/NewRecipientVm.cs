@@ -17,6 +17,8 @@ namespace SupplyScopeMVC.Application.ViewModels.Recipient
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+        public string CEOFirstName { get; set; }
+        public string CEOLastName { get; set; }
 
         public void Mapping(Profile profile)
         {

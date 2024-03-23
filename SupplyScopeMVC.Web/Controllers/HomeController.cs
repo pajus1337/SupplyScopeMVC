@@ -20,9 +20,11 @@ namespace SupplyScopeMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            _logger.LogInformation("test Home/Index");
             var items = _productServices.GetAllProducts();
             return View(items);
         }
+
         [Route("Products/All")]
         public IActionResult ViewListOfProducts()
         {

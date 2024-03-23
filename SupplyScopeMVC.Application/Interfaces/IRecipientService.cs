@@ -15,6 +15,6 @@ namespace SupplyScopeMVC.Application.Interfaces
         RecipientDetailsVm GetRecipientDetails(int recipientId);
         NewRecipientVm GetRecipientForEdit(int id);
         void UpdateRecipient(NewRecipientVm model);
-
+        void DeleteRecipient(int recipientId);
     }
 }

@@ -24,6 +24,17 @@ namespace SupplyScopeMVC.Infrastructure.Repositories
             return recipient.Id;
         }
 
+        public void DeleteRecipient(int recipientId)
+        {
+            var recipient = _contex.Recipients.Find(recipientId);
+            if (recipient == null)
+            {
+                throw new ArgumentException($"Recipient with ID {recipientId} not found.");
+            }
+            _contex.Recipients.Remove(recipient);
+            _contex.SaveChanges();
+        }
+
         public IQueryable<Recipient> GetAllActiveRecipients()
         {
             return _contex.Recipients.Where(p => p.IsActive);

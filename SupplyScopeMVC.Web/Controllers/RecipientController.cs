@@ -90,5 +90,11 @@ namespace SupplyScopeMVC.Web.Controllers
             var recipientModel = _recipientService.GetRecipientDetails(recipientId);
             return View(recipientModel);
         }
+
+        public IActionResult Delete(int recipientId)
+        {
+            _recipientService.DeleteRecipient(recipientId);
+            return RedirectToAction("index");
+        }
     }
 }

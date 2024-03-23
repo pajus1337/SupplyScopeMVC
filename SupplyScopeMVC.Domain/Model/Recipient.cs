@@ -14,7 +14,7 @@ namespace SupplyScopeMVC.Domain.Model
         public string Name { get; set; }
         public string  CEOFirstName { get; set; }
         public string CEOLastName { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
         public byte[] LogoPic { get; set; }
 
         public RecipientContactInformation RecipientContactInformation { get; set; }

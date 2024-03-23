@@ -13,5 +13,6 @@ namespace SupplyScopeMVC.Domain.Interfaces
         Recipient GetRecipient(int recipientId);
         int AddRecipient(Recipient recipient);
         void UpdateRecipient(Recipient recipient);
+        void DeleteRecipient(int recipientId);
     }
 }

@@ -31,6 +31,11 @@ namespace SupplyScopeMVC.Application.Services
             return id;
         }
 
+        public void DeleteRecipient(int recipientId)
+        {
+            _recipientRepository.DeleteRecipient(recipientId);
+        }
+
         public ListRecipientForListVm GetAllRecipientsForList(int pageSize, int pageNumber, string searchString)
         {
             var recipients = _recipientRepository.GetAllActiveRecipients().Where(p => p.Name.StartsWith(searchString)).ProjectTo<RecipientForListVm>(_mapper.ConfigurationProvider).ToList();
