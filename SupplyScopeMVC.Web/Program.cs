@@ -37,6 +37,18 @@ namespace SupplyScopeMVC.Web
             builder.Services.AddFluentValidationClientsideAdapters();
             builder.Services.AddTransient<IValidator<NewRecipientVm>, NewRecipientValidaton>();
 
+            // Identity 
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.User.RequireUniqueEmail = true; 
+            });
+
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure();
 
