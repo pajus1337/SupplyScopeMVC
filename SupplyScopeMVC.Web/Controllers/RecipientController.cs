@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SupplyScopeMVC.Application.Interfaces;
 using SupplyScopeMVC.Application.ViewModels.Recipient;
 using SupplyScopeMVC.Domain.Model;
 
 namespace SupplyScopeMVC.Web.Controllers
 {
+    [Authorize]
     public class RecipientController : Controller
     {
         private readonly IRecipientService _recipientService;
