@@ -38,15 +38,24 @@ namespace SupplyScopeMVC.Web
             builder.Services.AddTransient<IValidator<NewRecipientVm>, NewRecipientValidaton>();
 
             // Identity 
-            builder.Services.Configure<IdentityOptions>(options =>
-            {
+            builder.Services.Configure<IdentityOptions>(options => {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
                 options.SignIn.RequireConfirmedEmail = false;
-                options.User.RequireUniqueEmail = true; 
+                options.User.RequireUniqueEmail = true;
+            });
+
+            // Authorization 
+            builder.Services.AddAuthorization(options => {
+                options.AddPolicy("CanEditClient", policy =>
+                {
+                    policy.RequireClaim("EditClient");
+                    policy.RequireClaim("ShowClient");
+                    policy.RequireRole("Admin");
+                });
             });
 
             builder.Services.AddApplication();
