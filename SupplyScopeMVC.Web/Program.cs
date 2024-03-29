@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SupplyScopeMVC.Application;
 using SupplyScopeMVC.Application.Interfaces;
 using SupplyScopeMVC.Application.Services;
@@ -10,6 +11,8 @@ using SupplyScopeMVC.Domain.Interfaces;
 using SupplyScopeMVC.Infrastructure;
 using SupplyScopeMVC.Infrastructure.Repositories;
 using SupplyScopeMVC.Web.Models;
+using System.Configuration;
+using System.Runtime.InteropServices;
 
 namespace SupplyScopeMVC.Web
 {
@@ -29,7 +32,7 @@ namespace SupplyScopeMVC.Web
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Context>();
+
             builder.Services.AddControllersWithViews();
 
             // flutentValidation
@@ -38,7 +41,13 @@ namespace SupplyScopeMVC.Web
             builder.Services.AddTransient<IValidator<NewRecipientVm>, NewRecipientValidaton>();
 
             // Identity 
+<<<<<<< HEAD
             builder.Services.Configure<IdentityOptions>(options => {
+=======
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Context>();
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+>>>>>>> bbb90a25ba44871d024a0862ac623094470fe065
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = false;
@@ -57,6 +66,14 @@ namespace SupplyScopeMVC.Web
                     policy.RequireRole("Admin");
                 });
             });
+
+            // Google oAtuh2 Configuration 
+            var configuration = builder.Configuration;
+            builder.Services.AddAuthentication().AddGoogle(options => {
+                options.ClientId = configuration["Authentication:Google:ClientId"];
+                options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            });
+
 
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure();

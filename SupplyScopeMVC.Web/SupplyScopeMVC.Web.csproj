@@ -28,4 +28,8 @@
     <ProjectReference Include="..\SupplyScopeMVC.Infrastructure\SupplyScopeMVC.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 </Project>

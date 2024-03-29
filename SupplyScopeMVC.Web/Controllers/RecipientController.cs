@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SupplyScopeMVC.Application.Interfaces;
 using SupplyScopeMVC.Application.ViewModels.Recipient;
 using SupplyScopeMVC.Domain.Model;
+using SupplyScopeMVC.Web.Filters;
 
 namespace SupplyScopeMVC.Web.Controllers
 {
@@ -20,8 +22,9 @@ namespace SupplyScopeMVC.Web.Controllers
             return View(model);
         }
 
+        [CheckPermissions("Read")]
         [HttpPost]
-        public IActionResult Index(int pageSize, int? pageNumber, string searchString)
+        public IActionResult Index(int pageSize = 1, int? pageNumber = 1, string searchString = "")
         {
             if (!pageNumber.HasValue)
             {
@@ -36,6 +39,7 @@ namespace SupplyScopeMVC.Web.Controllers
             return View(model);
         }
 
+        [CheckPermissions("Write")]
         [HttpGet]
         public IActionResult AddRecipient()
         {
