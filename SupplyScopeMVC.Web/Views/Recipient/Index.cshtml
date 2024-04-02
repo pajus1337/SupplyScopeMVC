@@ -3,12 +3,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <form asp-action="Index" asp-controller="Recipient" method="post">
     <div class="row">
         <div class="col-sm-8 col-md-6">

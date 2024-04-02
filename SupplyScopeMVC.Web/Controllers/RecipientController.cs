@@ -39,13 +39,14 @@ namespace SupplyScopeMVC.Web.Controllers
             return View(model);
         }
 
-        [CheckPermissions("Write")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AddRecipient()
         {
             return View(new NewRecipientVm());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddRecipient(NewRecipientVm model)

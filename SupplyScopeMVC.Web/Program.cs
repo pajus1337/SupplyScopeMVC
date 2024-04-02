@@ -41,13 +41,10 @@ namespace SupplyScopeMVC.Web
             builder.Services.AddTransient<IValidator<NewRecipientVm>, NewRecipientValidaton>();
 
             // Identity 
-<<<<<<< HEAD
-            builder.Services.Configure<IdentityOptions>(options => {
-=======
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Context>();
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<Context>();
             builder.Services.Configure<IdentityOptions>(options =>
             {
->>>>>>> bbb90a25ba44871d024a0862ac623094470fe065
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = false;
